@@ -4138,7 +4138,7 @@ static int init(void) {
     maxevents++;
 
     has_inkernel_module = !access(INKERNEL_MINFREE_PATH, W_OK);
-    use_inkernel_interface = has_inkernel_module && !enable_userspace_lmk;
+    use_inkernel_interface = has_inkernel_module || !enable_userspace_lmk;
 
     if (use_inkernel_interface) {
         ALOGI("Using in-kernel low memory killer interface");
@@ -4615,7 +4615,7 @@ static void update_perf_props() {
         wbf_effective = wmark_boost_factor;
 
         //Update kernel interface during re-init.
-        use_inkernel_interface = has_inkernel_module && !enable_userspace_lmk;
+        use_inkernel_interface = has_inkernel_module || !enable_userspace_lmk;
         update_psi_window_size();
     }
 
